@@ -10,7 +10,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "load")
 public class Payload {
-
 	private long shipperId;
 	private String loadingPoint;
 	private String unloadingPoint;
@@ -21,11 +20,9 @@ public class Payload {
 	private String comment;
 	private String date;
 	
-
 	public Payload() {
 		super();
 	}
-	
 	
 	public Payload(String loadingPoint, String unloadingPoint, String productType, String truckType,
 			String noOfTrucks, String weight, String comment, String date) {
@@ -39,8 +36,6 @@ public class Payload {
 		this.comment = comment;
 		this.date = date;
 	}
-
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
