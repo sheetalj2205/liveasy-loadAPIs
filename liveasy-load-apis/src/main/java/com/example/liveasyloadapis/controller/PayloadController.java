@@ -20,17 +20,19 @@ import com.example.liveasyloadapis.model.Payload;
 import com.example.liveasyloadapis.repository.PayloadRepository;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class PayloadController {
 	@Autowired
 	private PayloadRepository payloadRepository;
 
-	@GetMapping("/load")
+	//get(retrieve) all the records of payloads
+	@GetMapping("load")
 	public List<Payload> getAllPayloads() {
 		return payloadRepository.findAll();
 	}
 
-	@GetMapping("/load/{loadId}")
+	//get(retrieve) record of one payload by its shipperId
+	@GetMapping("load/{id}")
 	public ResponseEntity<Payload> getPayloadById(@PathVariable(value = "id") Long shipperId)
 			throws ResourceNotFoundException {
 		Payload Payload = payloadRepository.findById(shipperId)
@@ -38,12 +40,14 @@ public class PayloadController {
 		return ResponseEntity.ok().body(Payload);
 	}
 
-	@PostMapping("/load")
+	//add payload in table
+	@PostMapping("load")
 	public Payload createPayload(@RequestBody Payload payload) {
 		return payloadRepository.save(payload);
 	}
 
-	@PutMapping("/load/{loadId}")
+	//update record of respective payload 
+	@PutMapping("load/{id}")
 	public ResponseEntity<Payload> updatePayload(@PathVariable(value = "id") Long shipperId,
 		 @RequestBody Payload PayloadDetails) throws ResourceNotFoundException {
 		Payload payload = payloadRepository.findById(shipperId)
@@ -60,8 +64,9 @@ public class PayloadController {
 		final Payload updatedPayload = payloadRepository.save(payload);
 		return ResponseEntity.ok(updatedPayload);
 	}
-
-	@DeleteMapping("/load/{loadId}")
+	
+    //delete record of specific payload 
+   	@DeleteMapping("load/{id}")
 	public Map<String, Boolean> deletePayload(@PathVariable(value = "id") Long shipperId)
 			throws ResourceNotFoundException {
 		Payload Payload = payloadRepository.findById(shipperId)
